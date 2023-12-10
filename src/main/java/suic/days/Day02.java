@@ -37,6 +37,7 @@ public class Day02 implements Puzzle<Integer> {
 
     @Override
     public Integer solvePart2() {
+        // actual meme but more efficient than creating 3 streams (one for each maxBy)
         return StreamEx.of(games).map(Game::sets).foldLeft(0, (acc, sets) -> {
             int multiplied = sets.stream().collect(
                     teeing3(
@@ -74,11 +75,11 @@ public class Day02 implements Puzzle<Integer> {
             int green = 0;
             int blue = 0;
             for (String str : data) {
-                String[] split = str.split(", ");
-                for (String colorData : split) {
-                    String[] split1 = colorData.split(" ");
-                    int count = Integer.parseInt(split1[0]);
-                    String color = split1[1];
+                String[] split1 = str.split(", ");
+                for (String colorData : split1) {
+                    String[] split2 = colorData.split(" ");
+                    int count = Integer.parseInt(split2[0]);
+                    String color = split2[1];
                     switch (color) {
                         case "red" -> red = count;
                         case "green" -> green = count;
