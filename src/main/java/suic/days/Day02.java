@@ -39,7 +39,7 @@ public class Day02 implements Puzzle<Integer> {
     public Integer solvePart2() {
         // actual meme but more efficient than creating 3 streams (one for each maxBy)
         return StreamEx.of(games).map(Game::sets).foldLeft(0, (acc, sets) -> {
-            int multiplied = sets.stream().collect(
+            int power = sets.stream().collect(
                     teeing3(
                             collectingAndThen(mapping(GameSet::red, maxBy(Integer::compare)), Optional::orElseThrow),
                             collectingAndThen(mapping(GameSet::green, maxBy(Integer::compare)), Optional::orElseThrow),
@@ -47,7 +47,7 @@ public class Day02 implements Puzzle<Integer> {
                             this::power
                     )
             );
-            return acc + multiplied;
+            return acc + power;
         });
     }
 
